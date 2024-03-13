@@ -3,9 +3,13 @@ package com.codepath.bestsellerlistapp
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.codepath.bestsellerlistapp.R.id
+import org.w3c.dom.Text
 
 /**
  * [RecyclerView.Adapter] that can display a [BestSellerBook] and makes a call to the
@@ -32,6 +36,13 @@ class BestSellerBooksRecyclerViewAdapter(
         val mBookTitle: TextView = mView.findViewById<View>(id.book_title) as TextView
         val mBookAuthor: TextView = mView.findViewById<View>(id.book_author) as TextView
 
+
+        // Step 4
+        val mBookDescription: TextView = mView.findViewById<View>(id.book_description) as TextView
+        val mBookURLImage: ImageView = mView.findViewById<View>(id.book_image) as ImageView
+        val mBookRank: TextView = mView.findViewById<View>(id.ranking) as TextView
+        val mBookBuy: Button = mView.findViewById<View>(id.buy_button) as Button
+
         override fun toString(): String {
             return mBookTitle.toString() + " '" + mBookAuthor.text + "'"
         }
@@ -46,9 +57,14 @@ class BestSellerBooksRecyclerViewAdapter(
         holder.mItem = book
         if (book != null) {
             holder.mBookTitle.text = book.title
-        }
-        if (book != null) {
             holder.mBookAuthor.text = book.author
+            holder.mBookDescription.text = book.description
+            holder.mBookRank.text = book.rank.toString()
+            Glide.with(holder.mView)
+                .load(book.bookImageURL)
+                .centerInside()
+                .into(holder.mBookURLImage)
+
         }
 
         holder.mView.setOnClickListener {

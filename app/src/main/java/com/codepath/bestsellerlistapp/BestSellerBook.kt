@@ -21,7 +21,7 @@ class BestSellerBook {
     var author: String? = null
 
     @JvmField
-    @SerializedName("bookImageURL")
+    @SerializedName("book_image")
     var bookImageURL: String? = null
 
     @JvmField
@@ -29,6 +29,6 @@ class BestSellerBook {
     var description: String? = null
 
     @JvmField
-    @SerializedName("amazonURL")
+    @SerializedName("amazon_product_url")
     var amazonURL: String? = null
 }
