@@ -12,7 +12,7 @@ import com.codepath.bestsellerlistapp.R.id
  * specified [OnListFragmentInteractionListener].
  */
 class BestSellerBooksRecyclerViewAdapter(
-    private val books: List<BestSellerBook>,
+    private val books: List<BestSellerBook>?,
     private val mListener: OnListFragmentInteractionListener?
     )
     : RecyclerView.Adapter<BestSellerBooksRecyclerViewAdapter.BookViewHolder>()
@@ -41,11 +41,15 @@ class BestSellerBooksRecyclerViewAdapter(
      * This lets us "bind" each Views in the ViewHolder to its' actual data!
      */
     override fun onBindViewHolder(holder: BookViewHolder, position: Int) {
-        val book = books[position]
+        val book = books?.get(position)
 
         holder.mItem = book
-        holder.mBookTitle.text = book.title
-        holder.mBookAuthor.text = book.author
+        if (book != null) {
+            holder.mBookTitle.text = book.title
+        }
+        if (book != null) {
+            holder.mBookAuthor.text = book.author
+        }
 
         holder.mView.setOnClickListener {
             holder.mItem?.let { book ->
@@ -58,6 +62,6 @@ class BestSellerBooksRecyclerViewAdapter(
      * Remember: RecyclerView adapters require a getItemCount() method.
      */
     override fun getItemCount(): Int {
-        return books.size
+        return books?.size ?: 0
     }
 }
