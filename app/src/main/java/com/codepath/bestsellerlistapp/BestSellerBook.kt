@@ -20,11 +20,15 @@ class BestSellerBook {
     @SerializedName("author")
     var author: String? = null
 
-    //TODO bookImageUrl
+    @JvmField
+    @SerializedName("bookImageURL")
+    var bookImageURL: String? = null
 
+    @JvmField
+    @SerializedName("description")
+    var description: String? = null
 
-    //TODO description
-
-
-    //TODO-STRETCH-GOALS amazonUrl
+    @JvmField
+    @SerializedName("amazonURL")
+    var amazonURL: String? = null
 }

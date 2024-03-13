@@ -14,8 +14,7 @@ import com.codepath.asynchttpclient.AsyncHttpClient
 import com.codepath.asynchttpclient.RequestParams
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler
 import com.google.gson.Gson
-import com.google.gson.GsonBuilder
-import com.google.gson.annotations.SerializedName
+import com.google.gson.reflect.TypeToken
 import okhttp3.Headers
 import org.json.JSONObject
 
@@ -71,19 +70,25 @@ class BestSellerBooksFragment : Fragment(), OnListFragmentInteractionListener {
                     // The wait for a response is over
                     progressBar.hide()
 
+                    val response =  json.jsonObject.get("results") as JSONObject
+                    val booksRaw = response.get("books").toString()
 
+                    // DEBUG
+                    Log.v("API CALL", response.toString())
+                    Log.v("API BOOKS", booksRaw)
+
+                    // Step 2a
                     //TODO - Parse JSON into Models
                     val resultsJSON: JSONObject = json.jsonObject.get("results") as JSONObject
                     val booksRawJSON: String = resultsJSON.get("books").toString()
 
-//                    @SerializedName("book_image")
-//                    var bookImageUrl: String? = null
-//
-//                    @SerializedName("description")
-//                    var description: String? = null
+                    // Step 2c
+                    val gson = Gson()
 
+                    // create a type for Gson to know
+                    val arrayBookType = object : TypeToken<List<BestSellerBook>>() {}.type
 
-                    val models: List<BestSellerBook>? = null // Fix me!
+                    val models: List<BestSellerBook>? = gson.fromJson(booksRawJSON, arrayBookType)
                     recyclerView.adapter =
                         BestSellerBooksRecyclerViewAdapter(models, this@BestSellerBooksFragment)
 
