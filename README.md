@@ -56,6 +56,12 @@ The "Buy" button successfully opens the page on Amazon
 - OnListFragmentInteractionListener - an interface used by the RecyclerView adapter
 
 
+### Resources
+- [Codepath's AsyncHTTPClient Library](https://guides.codepath.org/android/Using-CodePath-Async-Http-Client)
+- [Displaying Images with Glide](https://guides.codepath.org/android/Displaying-Images-with-the-Glide-Library)
+
+
+### Example of A json
 
 ```json
 [
