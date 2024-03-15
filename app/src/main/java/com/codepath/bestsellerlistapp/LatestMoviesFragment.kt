@@ -16,19 +16,17 @@ import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import okhttp3.Headers
+import org.json.JSONArray
 import org.json.JSONObject
 
 
-// --------------------------------//
-// CHANGE THIS TO BE YOUR API KEY  //
-// --------------------------------//
-private const val API_KEY = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
+private const val API_KEY = "f050e9cd49d9a138c81de2d8b8d1a374"
 
 /*
  * The class for the only fragment in the app, which contains the progress bar,
  * recyclerView, and performs the network calls to the NY Times API.
  */
-class BestSellerBooksFragment : Fragment(), OnListFragmentInteractionListener {
+class LatestMoviesFragment : Fragment(), OnListFragmentInteractionListener {
 
     /*
      * Constructing the view
@@ -56,10 +54,16 @@ class BestSellerBooksFragment : Fragment(), OnListFragmentInteractionListener {
         // Create and set up an AsyncHTTPClient() here
         val client = AsyncHttpClient()
         val params = RequestParams()
-        params["api-key"] = API_KEY
+
+        // hardcoding a few of these as I want to later use em on the stretch stuff
+        params["api_key"] = API_KEY
+        params["page"] = "1" // Gonna need to change this later i think
+        params["language"] = "en-US"
+        params["sort_by"] = "popularity.desc"
+
         // Using the client, perform the HTTP request
         client[
-            "https://api.themoviedb.org/3/movie/now_playing?&api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed",
+            "https://api.themoviedb.org/3/movie/now_playing",
             params,
             object : JsonHttpResponseHandler() { //connect these callbacks to your API call
                 override fun onSuccess(
@@ -70,30 +74,26 @@ class BestSellerBooksFragment : Fragment(), OnListFragmentInteractionListener {
                     // The wait for a response is over
                     progressBar.hide()
 
-                    val response =  json.jsonObject.get("results") as JSONObject
-                    val booksRaw = response.get("books").toString()
+                    // Step 2a
+                    val response =  json.jsonObject.get("results") as JSONArray
+                    val latestMoviesRaw = response.toString()
 
                     // DEBUG
                     Log.v("API CALL", response.toString())
-                    Log.v("API BOOKS", booksRaw)
-
-                    // Step 2a
-                    //TODO - Parse JSON into Models
-                    val resultsJSON: JSONObject = json.jsonObject.get("results") as JSONObject
-                    val booksRawJSON: String = resultsJSON.get("books").toString()
+                    Log.v("API MOVIES", latestMoviesRaw)
 
                     // Step 2c
                     val gson = Gson()
 
                     // create a type for Gson to know
-                    val arrayBookType = object : TypeToken<List<BestSellerBook>>() {}.type
+                    val arrayBookType = object : TypeToken<List<LatestMovies>>() {}.type
 
-                    val models: List<BestSellerBook>? = gson.fromJson(booksRawJSON, arrayBookType)
+                    val models: List<LatestMovies>? = gson.fromJson(latestMoviesRaw, arrayBookType)
                     recyclerView.adapter =
-                        BestSellerBooksRecyclerViewAdapter(models, this@BestSellerBooksFragment)
+                        LatestMoviesRecyclerViewAdapter(models, this@LatestMoviesFragment)
 
                     // Look for this in Logcat:
-                    Log.d("BestSellerBooksFragment", "response successful")
+                    Log.d("LatestMoviesFragment", "response successful")
                 }
 
                 /*
@@ -111,7 +111,7 @@ class BestSellerBooksFragment : Fragment(), OnListFragmentInteractionListener {
 
                     // If the error is not null, log it!
                     t?.message?.let {
-                        Log.e("BestSellerBooksFragment", errorResponse)
+                        Log.e("LatestMoviesFragment", errorResponse)
                     }
                 }
             }]
@@ -122,7 +122,7 @@ class BestSellerBooksFragment : Fragment(), OnListFragmentInteractionListener {
     /*
      * What happens when a particular book is clicked.
      */
-    override fun onItemClick(item: BestSellerBook) {
+    override fun onItemClick(item: LatestMovies) {
         Toast.makeText(context, "test: " + item.title, Toast.LENGTH_LONG).show()
     }
 

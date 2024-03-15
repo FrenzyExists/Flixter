@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">NY Times Best Seller</string>
-    <string name="buy_text">Buy on Amazon</string>
-    <string name="img_desc">Imagines from the NY api</string>
+    <string name="app_name">Flixter +</string>
+    <string name="buy_text">Add to Wishlist</string>
+    <string name="img_desc">Epic Movies</string>
 </resources>
