@@ -1,13 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/BG"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <FrameLayout
-        android:id="@+id/content"
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/editTextText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:autofillHints=""
+            android:background="@drawable/search_bg"
+            android:drawableStart="@drawable/magnifying_glass_solid"
+            android:drawablePadding="8dp"
+            android:ems="10"
+            android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:inputType="text"
+        android:minHeight="48dp"
+        android:padding="10dp"
+        android:hint="@string/search"
+        android:textColor="@color/FG2"
+        android:textColorHint="@color/FG2" />
+
+        <FrameLayout
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </FrameLayout>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

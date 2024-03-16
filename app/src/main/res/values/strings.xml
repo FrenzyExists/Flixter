@@ -2,4 +2,8 @@
     <string name="app_name">Flixter +</string>
     <string name="buy_text">Add to Wishlist</string>
     <string name="img_desc">Epic Movies</string>
+    <string name="search">Search...</string>
+    <string name="ratingText">0</string>
+    <string name="langText">en</string>
+    <string name="movie_title">Movie Title</string>
 </resources>

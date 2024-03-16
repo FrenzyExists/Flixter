@@ -24,26 +24,4 @@ class LatestMovies {
     @SerializedName("poster_path")
     var poster: String? = null
 
-//    @SerializedName("rank")
-//    var rank = 0
-//
-//    @JvmField
-//    @SerializedName("title")
-//    var title: String? = null
-//
-//    @JvmField
-//    @SerializedName("author")
-//    var author: String? = null
-//
-//    @JvmField
-//    @SerializedName("book_image")
-//    var bookImageURL: String? = null
-//
-//    @JvmField
-//    @SerializedName("description")
-//    var description: String? = null
-//
-//    @JvmField
-//    @SerializedName("amazon_product_url")
-//    var amazonURL: String? = null
 }

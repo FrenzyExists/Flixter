@@ -1,23 +1,32 @@
 package com.codepath.bestsellerlistapp
 
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.core.app.ActivityOptionsCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.codepath.bestsellerlistapp.R.id
+import com.google.gson.Gson
 
 /**
  * [RecyclerView.Adapter] that can display a [LatestMovies] and makes a call to the
  * specified [OnListFragmentInteractionListener].
  */
 
+const val MOVIE_EXTRA = "MOVIE_EXTRA"
 private val getImgURL = "https://image.tmdb.org/t/p/w500"
 class LatestMoviesRecyclerViewAdapter(
+    private val context : Context?,
     private val latestMovies: List<LatestMovies>?,
     private val mListener: OnListFragmentInteractionListener?
     )
@@ -34,19 +43,19 @@ class LatestMoviesRecyclerViewAdapter(
      * (Yes, the same ones as in the XML layout files!)
      */
     inner class MoviesViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
+
         var mItem: LatestMovies? = null
-        val mBookTitle: TextView = mView.findViewById<View>(id.book_title) as TextView
-        val mBookAuthor: TextView = mView.findViewById<View>(id.book_author) as TextView
+        val mMovieTitle: TextView = mView.findViewById<View>(id.book_title) as TextView
+        val mBookAuthor: TextView = mView.findViewById<View>(id.movie_release_date) as TextView
 
 
         // Step 4
-        val mMovieOverview: TextView = mView.findViewById<View>(id.book_description) as TextView
+        val mMovieOverview: TextView = mView.findViewById<View>(id.movie_overview) as TextView
         val mBookURLImage: ImageView = mView.findViewById<View>(id.book_image) as ImageView
-        val mBookRank: TextView = mView.findViewById<View>(id.ranking) as TextView
         val mBookBuy: Button = mView.findViewById<View>(id.buy_button) as Button
 
         override fun toString(): String {
-            return mBookTitle.toString() + " '" + mBookAuthor.text + "'"
+            return mMovieTitle.toString() + " '" + mBookAuthor.text.toString() + "'"
         }
     }
 
@@ -58,10 +67,8 @@ class LatestMoviesRecyclerViewAdapter(
         Log.v("ADAPTER DATA BOOKS", movie.toString())
         holder.mItem = movie
         if (movie != null) {
-            holder.mBookTitle.text = movie.title
-//            holder.mBookAuthor.text = book.author
+            holder.mMovieTitle.text = movie.title
             holder.mMovieOverview.text = movie.overview
-//            holder.mBookRank.text = book.rank.toString()
             Glide.with(holder.mView)
                 .load(getImgURL+ movie.poster)
                 .centerInside()
@@ -69,17 +76,23 @@ class LatestMoviesRecyclerViewAdapter(
 
         }
 
-//        holder.mBookBuy.setOnClickListener {
-//            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(book?.amazonURL ?: "amazon.com"))
-//            startActivity(it.context, browserIntent, null)
-//        }
-//
-//        holder.mView.setOnClickListener {
-//            holder.mItem?.let { book ->
-//                mListener?.onItemClick(book)
-//            }
-//        }
+        holder.mView.setOnClickListener {
+            val m = latestMovies?.get(position)
+            m?.let {
+                val gson = Gson()
+                val movieJson = gson.toJson(m)
+
+                val intent = Intent(context, MovieDetailsActivity::class.java)
+                intent.putExtra(MOVIE_EXTRA, movieJson) // Pass movie object as JSON string
+                context?.startActivity(intent)
+            }
+        }
+
+        holder.mBookBuy.setOnClickListener {
+
+        }
     }
+
 
     /**
      * Remember: RecyclerView adapters require a getItemCount() method.

@@ -90,7 +90,7 @@ class LatestMoviesFragment : Fragment(), OnListFragmentInteractionListener {
 
                     val models: List<LatestMovies>? = gson.fromJson(latestMoviesRaw, arrayBookType)
                     recyclerView.adapter =
-                        LatestMoviesRecyclerViewAdapter(models, this@LatestMoviesFragment)
+                        LatestMoviesRecyclerViewAdapter(context, models, this@LatestMoviesFragment)
 
                     // Look for this in Logcat:
                     Log.d("LatestMoviesFragment", "response successful")

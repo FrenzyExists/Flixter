@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="6dp">
+    android:layout_margin="6dp"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,29 +14,18 @@
         app:layout_constraintTop_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:gravity="center">
 
-            <TextView
-                android:id="@+id/ranking"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="2dp"
-                android:fontFamily="serif"
-                android:textAppearance="?attr/textAppearanceListItem"
-                android:textColor="#393941"
-                android:textSize="24sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/book_image"
-                android:layout_width="wrap_content"
-                android:layout_gravity="center"
-                android:layout_height="150dp"
-                android:contentDescription="@string/img_desc"
-                app:layout_constraintStart_toEndOf="@+id/ranking"
-                app:layout_constraintTop_toTopOf="@+id/ranking"
-                app:srcCompat="@android:drawable/ic_menu_gallery" />
+        <ImageView
+            android:id="@+id/book_image"
+            android:layout_width="wrap_content"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:contentDescription="@string/img_desc"
+            app:layout_constraintStart_toEndOf="@+id/ranking"
+            app:layout_constraintTop_toTopOf="@+id/ranking"
+            app:srcCompat="@android:drawable/ic_menu_gallery" />
 
 
         <TextView
@@ -46,26 +35,26 @@
             android:textAllCaps="true"
             android:textSize="18sp"
             android:textAppearance="?attr/textAppearanceListItem"
-            android:textColor="#0E103D"
+            android:textColor="@color/ACC"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/book_author"
+            android:id="@+id/movie_release_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#69306D"
+            android:textColor="@color/FG2"
             android:textAppearance="?attr/textAppearanceListItem"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/book_title" />
 
         <TextView
-            android:id="@+id/book_description"
+            android:id="@+id/movie_overview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:textColor="#393941"
+            android:textColor="@color/FG2"
             android:maxLines="4"
             android:fontFamily="sans-serif-light"
             android:textAppearance="?attr/textAppearanceListItem"
