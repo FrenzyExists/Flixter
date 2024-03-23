@@ -61,6 +61,7 @@ class LatestMoviesFragment : Fragment(), OnListFragmentInteractionListener {
         params["language"] = "en-US"
         params["sort_by"] = "popularity.desc"
 
+        Log.v("TEST", "Loading")
         // Using the client, perform the HTTP request
         client[
             "https://api.themoviedb.org/3/movie/now_playing",
@@ -75,7 +76,7 @@ class LatestMoviesFragment : Fragment(), OnListFragmentInteractionListener {
                     progressBar.hide()
 
                     // Step 2a
-                    val response =  json.jsonObject.get("results") as JSONArray
+                    val response = json.jsonObject.get("results") as JSONArray
                     val latestMoviesRaw = response.toString()
 
                     // DEBUG
@@ -107,6 +108,7 @@ class LatestMoviesFragment : Fragment(), OnListFragmentInteractionListener {
                     t: Throwable?
                 ) {
                     // The wait for a response is over
+                    Log.v("FAIL", "Doesn't work")
                     progressBar.hide()
 
                     // If the error is not null, log it!
@@ -114,7 +116,8 @@ class LatestMoviesFragment : Fragment(), OnListFragmentInteractionListener {
                         Log.e("LatestMoviesFragment", errorResponse)
                     }
                 }
-            }]
+            }
+        ]
 
 
     }
